@@ -1,0 +1,29 @@
+{
+  "skill_name": "pbb-master",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Vou construir um app de delivery de comida saudável pra academias. Já tenho a visão mas nunca montei um backlog. Me ajuda a criar o product backlog do zero?",
+      "expected_output": "Facilita o PBB Canvas completo: contexto (problemas/expectativas), personas, features (máx 10, com problemas/benefícios), PBIs via Steps Map em ARO, COORG, e user stories. Entrega canvas HTML + export markdown.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Meu backlog no Jira virou um lixão: são 180 cards soltos, sem prioridade, muitos duplicados e vagos tipo 'melhorar tela de login'. Como eu recupero isso?",
+      "expected_output": "Modo revitalizar: diagnóstico, mapeia itens existentes para personas/features do canvas, reescreve PBIs em ARO, aplica COORG pra priorizar e cortar (PO diz NÃO), define refinamento contínuo.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I have one giant feature in my backlog called 'Checkout' and the devs say it's way too big for a sprint. How do I break it down into smaller stories using PBB?",
+      "expected_output": "Modo quebrar feature: aplica Steps Map (2 etapas) na feature Checkout, gera PBIs em ARO, prioriza com COORG, converte em user stories (3Ws) e sinaliza habilitadores. Responde em inglês.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Acabamos de terminar uma Lean Inception e temos o MVP Canvas e o Sequenciador. E agora, qual o próximo passo pra ter as histórias prontas pro time começar?",
+      "expected_output": "Reconhece PBB como passo seguinte da Lean Inception: reaproveita personas e a ordem do Sequenciador (= etapa Ordenar do COORG), aplica Steps Map nas features do MVP, COORG nas histórias, escreve user stories.",
+      "files": []
+    }
+  ]
+}

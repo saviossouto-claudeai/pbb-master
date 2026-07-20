@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PBB Canvas — Aprovo (exemplo)</title>
+<style>
+  :root{
+    --bg:#f4f5f7; --panel:#ffffff; --ink:#1b2733; --muted:#5a6b7b; --line:#e2e6ea;
+    --accent:#2f6f4f; --accent-soft:#e7f2ec; --prob:#c8452f; --prob-soft:#fbeae6;
+    --benef:#2f6f4f; --benef-soft:#e7f2ec; --q:#e08a00; --c:#2f8f4f; --i:#2b7fce;
+    --pill:#eef1f4; --shadow:0 1px 2px rgba(16,32,48,.06),0 4px 16px rgba(16,32,48,.06);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#0f151b;--panel:#161f28;--ink:#e6edf3;--muted:#9fb0bf;--line:#26323d;
+      --accent:#5cc08a;--accent-soft:#12261c;--prob:#f0836b;--prob-soft:#2a1512;
+      --benef:#5cc08a;--benef-soft:#12261c;--pill:#1e2933;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 20px rgba(0,0,0,.35);}
+  }
+  :root[data-theme="dark"]{--bg:#0f151b;--panel:#161f28;--ink:#e6edf3;--muted:#9fb0bf;--line:#26323d;--accent:#5cc08a;--accent-soft:#12261c;--prob:#f0836b;--prob-soft:#2a1512;--benef:#5cc08a;--benef-soft:#12261c;--pill:#1e2933;}
+  :root[data-theme="light"]{--bg:#f4f5f7;--panel:#ffffff;--ink:#1b2733;--muted:#5a6b7b;--line:#e2e6ea;--accent:#2f6f4f;--accent-soft:#e7f2ec;--prob:#c8452f;--prob-soft:#fbeae6;--benef:#2f6f4f;--benef-soft:#e7f2ec;--pill:#eef1f4;}
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font:15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:1120px;margin:0 auto;padding:28px 20px 80px;}
+  header.top{display:flex;flex-wrap:wrap;align-items:baseline;gap:12px;margin-bottom:6px;}
+  header.top h1{font-size:26px;margin:0;letter-spacing:-.01em;}
+  .tag{font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);
+    padding:3px 9px;border-radius:999px;}
+  .sub{color:var(--muted);margin:0 0 22px;font-size:14px;}
+  .theme{margin-left:auto;font-size:13px;color:var(--muted);cursor:pointer;background:none;
+    border:1px solid var(--line);border-radius:8px;padding:5px 10px;}
+  section{background:var(--panel);border:1px solid var(--line);border-radius:14px;
+    padding:18px 20px;margin:16px 0;box-shadow:var(--shadow);}
+  h2{font-size:13px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);
+    margin:0 0 14px;font-weight:700;}
+  h2 .n{display:inline-flex;width:20px;height:20px;align-items:center;justify-content:center;
+    background:var(--accent);color:#fff;border-radius:50%;font-size:11px;margin-right:8px;}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .col h3{font-size:12px;margin:0 0 8px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;}
+  ul.clean{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px;}
+  ul.clean li{background:var(--pill);border-radius:8px;padding:7px 11px;font-size:14px;}
+  .personas{display:flex;flex-wrap:wrap;gap:12px;}
+  .persona{flex:1 1 220px;border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:var(--bg);}
+  .persona .name{font-weight:700;margin-bottom:6px;}
+  .persona .row{font-size:13px;color:var(--muted);}
+  .persona .row b{color:var(--ink);font-weight:600;}
+  .feature{border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px;background:var(--bg);}
+  .feature .fhead{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:10px;}
+  .feature .ftitle{font-weight:700;font-size:16px;}
+  .chip{font-size:11px;font-weight:600;padding:2px 8px;border-radius:999px;background:var(--pill);color:var(--muted);}
+  .pb{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
+  .pb .box{border-radius:10px;padding:9px 11px;font-size:13px;}
+  .pb .prob{background:var(--prob-soft);} .pb .prob b{color:var(--prob);}
+  .pb .benef{background:var(--benef-soft);} .pb .benef b{color:var(--benef);}
+  .pb ul{margin:6px 0 0;padding-left:16px;} .pb li{margin:2px 0;}
+  .steps{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;}
+  .step{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:10px;
+    padding:9px 12px;font-size:13px;min-width:150px;flex:1 1 160px;}
+  .step .aro{font-weight:600;}
+  .step .notes{margin-top:6px;display:flex;flex-wrap:wrap;gap:4px;}
+  .note{font-size:11px;padding:1px 7px;border-radius:999px;color:#fff;}
+  .note.q{background:var(--q);} .note.c{background:var(--c);} .note.i{background:var(--i);}
+  .steplabel{font-size:11px;color:var(--muted);margin-bottom:6px;}
+  table{width:100%;border-collapse:collapse;font-size:13px;}
+  .tablewrap{overflow-x:auto;}
+  th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);}
+  th{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
+  td.num,th.num{text-align:center;}
+  .total{font-weight:700;color:var(--accent);}
+  tr.cut td{opacity:.5;text-decoration:line-through;}
+  .story{border:1px solid var(--line);border-radius:10px;
+    padding:12px 14px;margin-bottom:12px;background:var(--bg);}
+  .story .card b:first-child{position:relative;}
+  .story .card{font-size:15px;line-height:1.5;}
+  .story .card b{color:var(--accent);}
+  .story .ac{margin-top:10px;font-size:13px;}
+  .story .ac .acitem{background:var(--pill);border-radius:8px;padding:6px 10px;margin-top:5px;}
+  .story .meta{margin-top:9px;font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;gap:14px;}
+  .empty{color:var(--muted);font-style:italic;}
+  @media(max-width:680px){.grid2,.pb{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <h1 id="pName">Nome do Produto</h1>
+    <span class="tag">PBB Canvas</span>
+    <button class="theme" onclick="toggleTheme()">◐ tema</button>
+  </header>
+  <p class="sub">Product Backlog Building · método de Fábio Aguiar &amp; Paulo Caroli</p>
+
+  <section>
+    <h2><span class="n">1</span>Contexto do Produto</h2>
+    <div class="grid2">
+      <div class="col"><h3>Problemas — estado atual</h3><ul class="clean" id="problems"></ul></div>
+      <div class="col"><h3>Expectativas — estado desejado</h3><ul class="clean" id="expectations"></ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="n">2</span>Personas</h2>
+    <div class="personas" id="personas"></div>
+  </section>
+
+  <section>
+    <h2><span class="n">3</span>Features &amp; <span class="n" style="background:var(--muted)">4</span>PBIs (Steps Map)</h2>
+    <div id="features"></div>
+  </section>
+
+  <section>
+    <h2>COORG — Backlog priorizado</h2>
+    <p class="sub" id="coorgCriteria" style="margin:-6px 0 12px"></p>
+    <div class="tablewrap"><table id="coorg"></table></div>
+  </section>
+
+  <section>
+    <h2>User Stories</h2>
+    <div id="stories"></div>
+  </section>
+</div>
+
+<script>
+/* ==== PBB DATA ==== troque APENAS este objeto pelos dados reais da sessão.
+   Deixe arrays vazios ([]) para omitir uma seção. Não altere o código abaixo. */
+const PBB = {
+  productName: "Aprovo",
+  problems: [
+    "Aprovacoes de despesa acontecem por e-mail e se perdem",
+    "Nao ha trilha de quem aprovou o que, e quando"
+  ],
+  expectations: [
+    "Aprovar despesas em poucos toques, com rastreabilidade",
+    "Fechar o mes sem retrabalho de conferencia manual"
+  ],
+  personas: [
+    { name:"Gestora de RH", does:"aprova horas extras no fim do mes", expects:"aprovar sem planilha e com historico" },
+    { name:"Colaborador solicitante", does:"pede reembolso por e-mail", expects:"saber o status do pedido" }
+  ],
+  features: [
+    {
+      title:"Aprovar despesa",
+      persona:"Gestora de RH",
+      problems:["Aprovacao por e-mail se perde", "Sem trilha de auditoria"],
+      benefits:["Aprovacao rastreavel", "Menos retrabalho no fechamento"],
+      steps:[
+        { aro:"Listar as despesas pendentes", notes:[{t:"i",x:"filtrar por centro de custo"}] },
+        { aro:"Abrir o detalhe de uma despesa", notes:[] },
+        { aro:"Registrar a decisao de aprovacao", notes:[{t:"q",x:"limite de alcada?"}] },
+        { aro:"Notificar o solicitante", notes:[{t:"i",x:"push + e-mail"}] }
+      ]
+    },
+    {
+      title:"Acompanhar pedido",
+      persona:"Colaborador solicitante",
+      problems:["Nao sabe o status do reembolso"],
+      benefits:["Transparencia do andamento"],
+      steps:[
+        { aro:"Consultar o status do pedido", notes:[] },
+        { aro:"Receber a notificacao de aprovacao", notes:[{t:"c",x:"reusar servico de notificacao"}] }
+      ]
+    }
+  ],
+  coorg: {
+    criteria: "Frequencia de uso (1-5) + Valor de negocio (1-3), Prioridade = soma",
+    columns: ["Frequencia", "Valor"],
+    rows: [
+      { pbi:"Registrar a decisao de aprovacao", feature:"Aprovar despesa", scores:[5,3], total:8, cut:false },
+      { pbi:"Listar as despesas pendentes", feature:"Aprovar despesa", scores:[5,2], total:7, cut:false },
+      { pbi:"Notificar o solicitante", feature:"Aprovar despesa", scores:[4,2], total:6, cut:false },
+      { pbi:"Consultar o status do pedido", feature:"Acompanhar pedido", scores:[3,2], total:5, cut:false },
+      { pbi:"Abrir o detalhe de uma despesa", feature:"Aprovar despesa", scores:[2,1], total:3, cut:true }
+    ]
+  },
+  stories: [
+    {
+      who:"Gestora de RH", what:"registrar a aprovacao de uma despesa pendente",
+      why:"liberar o pagamento ao solicitante com rastreabilidade",
+      acceptance:[
+        "Dado que a despesa esta dentro do meu limite de alcada, Quando eu a aprovo, Entao ela muda para aprovada e o solicitante e notificado",
+        "Dado que a despesa excede meu limite, Quando tento aprova-la, Entao o sistema exige a aprovacao do nivel superior"
+      ],
+      enablers:["Definir a regra de limite de alcada (habilitador tecnico)"], interface:"mockup de alta fidelidade"
+    },
+    {
+      who:"colaborador solicitante", what:"consultar o status do meu pedido de reembolso",
+      why:"saber quando o pagamento sera liberado",
+      acceptance:["Dado que tenho um pedido em analise, Quando abro o app, Entao vejo o status atual do pedido"],
+      enablers:[], interface:"wireframe"
+    }
+  ]
+};
+
+/* ==== RENDER (não editar) ==== */
+const $=(id)=>document.getElementById(id);
+const esc=(s)=>String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+function li(arr,cls){return (arr&&arr.length)?arr.map(x=>`<li>${esc(x)}</li>`).join(''):`<li class="empty">—</li>`;}
+
+$('pName').textContent=PBB.productName||"Produto";
+document.title="PBB Canvas — "+(PBB.productName||"Produto");
+$('problems').innerHTML=li(PBB.problems);
+$('expectations').innerHTML=li(PBB.expectations);
+
+$('personas').innerHTML=(PBB.personas||[]).map(p=>`
+  <div class="persona"><div class="name">${esc(p.name)}</div>
+    <div class="row"><b>Faz:</b> ${esc(p.does||'—')}</div>
+    <div class="row"><b>Espera:</b> ${esc(p.expects||'—')}</div></div>`).join('')||'<p class="empty">Sem personas.</p>';
+
+$('features').innerHTML=(PBB.features||[]).map(f=>`
+  <div class="feature">
+    <div class="fhead"><span class="ftitle">${esc(f.title)}</span>
+      ${f.persona?`<span class="chip">👤 ${esc(f.persona)}</span>`:''}</div>
+    <div class="pb">
+      <div class="box prob"><b>Problemas</b><ul>${(f.problems||[]).map(x=>`<li>${esc(x)}</li>`).join('')||'<li class="empty">—</li>'}</ul></div>
+      <div class="box benef"><b>Benefícios</b><ul>${(f.benefits||[]).map(x=>`<li>${esc(x)}</li>`).join('')||'<li class="empty">—</li>'}</ul></div>
+    </div>
+    <div class="steplabel">Steps Map → cada passo é um PBI (modelo ARO), do topo (maior prioridade) para baixo</div>
+    <div class="steps">${(f.steps||[]).map((s,i)=>`
+      <div class="step"><div class="aro">${i+1}. ${esc(s.aro)}</div>
+        ${(s.notes&&s.notes.length)?`<div class="notes">${s.notes.map(n=>`<span class="note ${n.t}">${esc(n.x)}</span>`).join('')}</div>`:''}
+      </div>`).join('')}</div>
+  </div>`).join('')||'<p class="empty">Sem features.</p>';
+
+if(PBB.coorg&&PBB.coorg.rows&&PBB.coorg.rows.length){
+  $('coorgCriteria').textContent=PBB.coorg.criteria||'';
+  const cols=PBB.coorg.columns||[];
+  $('coorg').innerHTML=`<thead><tr><th class="num">Prio</th><th>PBI (ARO)</th><th>Feature</th>
+    ${cols.map(c=>`<th class="num">${esc(c)}</th>`).join('')}<th class="num">Total</th></tr></thead>
+    <tbody>${PBB.coorg.rows.map((r,i)=>`<tr class="${r.cut?'cut':''}">
+      <td class="num">${r.cut?'—':(i+1)}</td><td>${esc(r.pbi)}</td><td>${esc(r.feature||'')}</td>
+      ${(r.scores||[]).map(s=>`<td class="num">${esc(s)}</td>`).join('')}
+      <td class="num total">${esc(r.total)}</td></tr>`).join('')}</tbody>`;
+}else{$('coorg').innerHTML='<tbody><tr><td class="empty">COORG não aplicado.</td></tr></tbody>';}
+
+$('stories').innerHTML=(PBB.stories||[]).map(s=>{
+  const many=(s.acceptance||[]).length>5;
+  return `<div class="story">
+    <div class="card"><b>Como</b> ${esc(s.who)}<br><b>Posso</b> ${esc(s.what)}<br><b>Para</b> ${esc(s.why)}</div>
+    ${(s.acceptance&&s.acceptance.length)?`<div class="ac"><b style="font-size:12px;color:var(--muted)">Critérios de aceite</b>
+      ${s.acceptance.map(a=>`<div class="acitem">${esc(a)}</div>`).join('')}
+      ${many?'<div class="acitem" style="color:var(--prob)">⚠ Mais de 5 critérios — considere quebrar esta história em duas.</div>':''}</div>`:''}
+    <div class="meta">
+      ${(s.enablers&&s.enablers.length)?`<span>🔧 Habilitadores: ${s.enablers.map(esc).join('; ')}</span>`:''}
+      ${s.interface?`<span>🖼 Interface: ${esc(s.interface)}</span>`:''}
+    </div></div>`;}).join('')||'<p class="empty">Sem histórias.</p>';
+
+function toggleTheme(){
+  const r=document.documentElement;
+  const cur=r.getAttribute('data-theme')|| (matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
+  r.setAttribute('data-theme',cur==='dark'?'light':'dark');
+}
+</script>
+</body>
+</html>
