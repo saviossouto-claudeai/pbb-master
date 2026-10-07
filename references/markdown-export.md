@@ -53,3 +53,53 @@ Regras:
 - User Stories **sempre** no formato Como/Posso/Para (3Ws).
 - Critérios de aceite **sempre** em Dado/Quando/Então; se passarem de 5, sinalize que a história deveria ser quebrada.
 - Não invente pontuações COORG — use as definidas com o usuário.
+
+---
+
+# Modelos curtos — uso pontual (modo 0)
+
+Use só o bloco da prática pedida. Sem canvas, sem seções vazias.
+
+### Fatiamento
+```markdown
+**Item original:** Como [persona], Posso [função], Para [valor]
+**Por que fatiar:** [sinais: 9 ACs, 3 regras, 2 canais…]
+
+**Opção A — [padrão, ex.: Caminhos + Regras]**
+| # | Fatia (história) | Utilizável | Valor validável | Vertical | ACs ≤ 5 | Cabe no SLE |
+|---|---|---|---|---|---|---|
+| 1 | … | ✅ | ✅ | ✅ | ✅ | ✅ |
+
+**Opção B — [outro padrão]** …
+
+**Sugestão de primeira fatia:** [#] — [motivo em uma linha]. A decisão é do PO.
+**Habilitadores:** [ARO, se houver]
+
+### US-01 — [título]
+> Como … / Posso … / Para …
+- Dado que …, Quando …, Então …
+```
+
+### Revisão de histórias (INVEST + TAPAs)
+```markdown
+| História | I | N | V | E | S | T | Problema | Correção sugerida |
+|---|---|---|---|---|---|---|---|---|
+| US-01 | ✅ | ✅ | ⚠️ | ✅ | ❌ | ✅ | Valor não explícito; grande demais | Explicitar o "Para…"; fatiar por regra |
+```
+
+### Definition of Ready
+```markdown
+**Item:** [título] — **Ready? Não** (2 lacunas)
+| Critério do DoR | Status | Pergunta para fechar |
+|---|---|---|
+| História em 3Ws | ✅ | — |
+| Critérios de aceite | ❌ | "O que acontece quando…?" |
+```
+
+### COORG rápido
+```markdown
+Critérios: [critério (escala)] + [critério (escala)] · Fórmula: [soma] · _validar com o PO_
+| Ordem | PBI (ARO) | [C1] | [C2] | Total |
+|---|---|---|---|---|
+_Abaixo do corte (sugestão de "NÃO"):_ …
+```

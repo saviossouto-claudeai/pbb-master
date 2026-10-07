@@ -98,6 +98,8 @@ Para cada passo, peça que todos escrevam, individualmente, um post-it por quest
 
 Fazer individualmente por escrito evita que alguém de maior influência domine as decisões. Se o grupo colabora bem, pode ser verbal. Ao final, **cada passo do fluxo é um PBI**.
 
+**Depois do Steps Map, cheque cada PBI com o teste da fatia** (`fatiamento.md`, técnica complementar ao PBB). Um passo como "Listar as despesas pendentes" pode não servir a ninguém sozinho: junte-o ao passo vizinho ou refaça o corte para que alguém consiga usá-lo. Um passo grande demais para o SLE do time é fatiado com os padrões de lá.
+
 > **Steps Map ≠ User Journey.** A User Journey descreve o caminho do usuário até um objetivo. O Steps Map descreve o **fluxo de trabalho** — o que precisa ser construído para completar a feature. Coincidem quando ambos refletem, na mesma ordem, o que o usuário faz e o que precisa ser feito.
 
 ### Descreva a ação de cada PBI — modelo ARO

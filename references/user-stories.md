@@ -66,7 +66,7 @@ Então [RESULTADO ESPERADO]
 ```
 Os ACs formam a checklist que determina quando a história está concluída e funcionando; geralmente verificados junto ao PO.
 
-**DICA:** se uma história tiver **mais de cinco** critérios de aceite, considere **quebrá-la em duas**.
+**DICA:** se uma história tiver **mais de cinco** critérios de aceite, considere **quebrá-la em duas**. Os próprios critérios mostram onde cortar: cada regra ou cenário alternativo é candidato a fatia. Como fatiar sem perder valor: `fatiamento.md`.
 
 > Exemplo (original) — História: *Como gestora, Posso aprovar uma despesa pendente, Para liberar o pagamento ao solicitante.*
 > - AC 1: **Dado** que a despesa está dentro do meu limite de alçada, **Quando** eu a aprovo, **Então** ela muda para "aprovada" e o solicitante é notificado.

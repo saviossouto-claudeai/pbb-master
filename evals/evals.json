@@ -24,6 +24,30 @@
       "prompt": "Acabamos de terminar uma Lean Inception e temos o MVP Canvas e o Sequenciador. E agora, qual o próximo passo pra ter as histórias prontas pro time começar?",
       "expected_output": "Reconhece PBB como passo seguinte da Lean Inception: reaproveita personas e a ordem do Sequenciador (= etapa Ordenar do COORG), aplica Steps Map nas features do MVP, COORG nas histórias, escreve user stories.",
       "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "Essa história tá grande demais e o time diz que não cabe na sprint: 'Como gestor, posso gerenciar as férias da minha equipe, para planejar a capacidade do time'. Tem 8 critérios de aceite. Me ajuda a quebrar mas sem virar tarefa técnica, cada pedaço precisa entregar valor.",
+      "expected_output": "Modo uso pontual, sem canvas e sem sessão completa. Lê fatiamento.md, diz que é técnica complementar ao PBB, aponta os sinais de tamanho (verbo 'gerenciar', 8 ACs), propõe 2-3 formas de cortar por padrões diferentes, escreve as fatias como histórias com ACs, aplica o teste da fatia em cada uma, sugere a primeira fatia e deixa a decisão para o PO. Não fatia por camada.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Escreve os critérios de aceite dessa história pra eu colar no Azure: Como cliente, posso cancelar um pedido ainda não enviado, para não pagar por algo que desisti.",
+      "expected_output": "Modo uso pontual: entrega só os critérios em Dado/Quando/Então (até 5), em markdown pronto para colar. Não abre canvas nem pergunta contexto do produto.",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "Esse item pode entrar na sprint? 'Melhorar a tela de relatórios'",
+      "expected_output": "Modo uso pontual: aplica o DoR, mostra que não está ready (sem persona, sem valor, sem ACs, não está em 3Ws/ARO), lista as perguntas para o PO fechar cada lacuna e sugere uma reescrita marcada como hipótese.",
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "Prioriza esses itens pra mim: exportar relatório em PDF, login com Google, notificação de vencimento, filtro por data no extrato, tema escuro.",
+      "expected_output": "Modo uso pontual: COORG só nesses itens. Pergunta ou propõe critérios e escalas para o PO validar, reescreve os itens em ARO, entrega tabela pontuada e lista ordenada, sugere o corte (NÃO). Sem canvas.",
+      "files": []
     }
   ]
 }
